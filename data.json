@@ -23,9 +23,9 @@
     {
         "title":"Events",
         "subtitle":"งานและรายการต่างๆ",
-        "image_url":"https://cdn.pixabay.com/photo/2017/08/14/06/04/earphone-2639487_960_720.jpg",
+        "image_url":"https://raw.githubusercontent.com/ticktahod/BasicAPI/main/events1.jpg",
         "detail":"IG และ Twitter", 
-        "image_etc":"https://wallpapermoon.com/wp-content/uploads/2021/08/01500012.jpg"
+        "image_etc":"https://raw.githubusercontent.com/ticktahod/BasicAPI/main/events2.jpg"
     },
     {
         "title":"Follow",
