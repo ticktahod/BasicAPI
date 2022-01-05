@@ -36,12 +36,15 @@ class _DetailPageState extends State<DetailPage> {
               _v1,
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
+            SizedBox(
+              height: 5,
+            ),
             Text(
               _v2,
               style: TextStyle(fontSize: 17),
             ),
             SizedBox(
-              height: 10,
+              height: 15,
             ),
             Image.network(
               _v5,

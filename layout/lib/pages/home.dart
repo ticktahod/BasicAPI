@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:layout/pages/detail.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class HomePage extends StatefulWidget {
   //const HomePage({ Key? key }) : super(key: key);
@@ -21,22 +23,23 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
           padding: EdgeInsets.all(30),
           child: FutureBuilder(
-            builder: (context, snapshot) {
-              var data = json.decode(snapshot.data.toString());
+            builder: (context, AsyncSnapshot snapshot) {
+              //var data = json.decode(snapshot.data.toString());
               return ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return MyBox(
-                      data[index]['title'],
-                      data[index]['subtitle'],
-                      data[index]['image_url'],
-                      data[index]['detail'],
-                      data[index]['image_etc']);
+                      snapshot.data[index]['title'],
+                      snapshot.data[index]['subtitle'],
+                      snapshot.data[index]['image_url'],
+                      snapshot.data[index]['detail'],
+                      snapshot.data[index]['image_etc']);
                 },
-                itemCount: data.length,
+                itemCount: snapshot.data.length,
               );
             },
-            future:
-                DefaultAssetBundle.of(context).loadString('assets/data.json'),
+            future: getData(),
+            // future:
+            //     DefaultAssetBundle.of(context).loadString('assets/data.json'),
           )),
     );
   }
@@ -53,7 +56,7 @@ class _HomePageState extends State<HomePage> {
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(40),
       //color: Colors.blue[50],
-      height: 180,
+      height: 190,
       // decoration ส่วนตกเเต่ง
       decoration: BoxDecoration(
         //color: Colors.blue[50],
@@ -99,5 +102,14 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  Future getData() async {
+    // https://raw.githubusercontent.com/ticktahod/BasicAPI/main/data.json
+    var url = Uri.https(
+        'raw.githubusercontent.com', '/ticktahod/BasicAPI/main/data.json');
+    var response = await http.get(url);
+    var result = json.decode(response.body);
+    return result;
   }
 }
